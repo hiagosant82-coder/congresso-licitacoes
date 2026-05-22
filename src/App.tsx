@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { 
   Menu, 
@@ -14,7 +14,9 @@ import {
   ShieldCheck,
   TrendingUp,
   FastForward,
-  Rewind
+  Rewind,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
@@ -30,8 +32,7 @@ import heroV2 from './assets/hero-v2.jpg';
 import heroV3 from './assets/hero-v3.jpg';
 import heroV4 from './assets/hero-v4.jpg';
 import heroV5 from './assets/hero-v5.jpg';
-import speaker1 from './assets/speaker1.png';
-import speaker2 from './assets/speaker2.png';
+
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -139,6 +140,37 @@ export default function App() {
   const [currentVBanner, setCurrentVBanner] = useState(0);
   const hBanners = [hero1, hero2, hero3, hero4];
   const vBanners = [heroV1, heroV2, heroV3, heroV4, heroV5];
+
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (sliderRef.current) {
+      const { scrollLeft, clientWidth } = sliderRef.current;
+      const scrollTo = direction === 'left' 
+        ? scrollLeft - clientWidth * 0.75 
+        : scrollLeft + clientWidth * 0.75;
+      sliderRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
+
+  const speakers = [
+    { name: 'Dr. Ícaro Bitar', role: 'Planejamento Operacional & IA', image: heroV4, pos: 'center 22%' },
+    { name: 'Dr. Jamil Manasfi', role: 'Contratação Direta: Dispensa & Inexigibilidade', image: heroV1, pos: 'center 22%' },
+    { name: 'Dra. Camila Jacobsen', role: 'Responsabilização de Servidores', image: heroV3, pos: 'center 22%' },
+    { name: 'Dr. Jader Esteves', role: 'Gestão & Fiscalização de Contratos com IA', image: heroV2, pos: 'center 22%' },
+    { name: 'Dr. Willen Rarytton', role: 'Credenciamento & Contrata+ Brasil', image: heroV5, pos: 'center 22%' },
+    { name: 'Prof. Leandro Matsumota', role: 'Seleção do Fornecedor & Pregão', image: hero3, pos: '75% 25%' }
+  ];
+
+  const getSpeakerImage = (desc: string) => {
+    if (desc.includes('Ícaro Bitar')) return { img: heroV4, pos: 'center 22%' };
+    if (desc.includes('Jamil Manasfi')) return { img: heroV1, pos: 'center 22%' };
+    if (desc.includes('Camila Jacobsen')) return { img: heroV3, pos: 'center 22%' };
+    if (desc.includes('Jader Esteves')) return { img: heroV2, pos: 'center 22%' };
+    if (desc.includes('Willen Rarytton')) return { img: heroV5, pos: 'center 22%' };
+    if (desc.includes('Leandro Matsumota')) return { img: hero3, pos: '75% 25%' };
+    return null;
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -252,29 +284,59 @@ export default function App() {
         </section>
 
         {/* Speakers Section */}
-        <section id="palestrantes" className="py-16 md:py-24 bg-gradient-to-b from-[#0A0706] to-[#120F0D] px-6">
-          <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-100 uppercase tracking-tighter">
-              Nossos <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">Palestrantes</span>
-            </h2>
-            <p className="text-stone-400 text-sm max-w-2xl mx-auto font-medium">Reunimos os maiores nomes do Brasil para compartilhar conhecimento e experiências reais e atualizadas.</p>
+        <section id="palestrantes" className="py-16 md:py-24 bg-gradient-to-b from-[#0A0706] to-[#120F0D] px-6 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 md:mb-16 gap-6">
+            <div className="text-center md:text-left space-y-4">
+              <h2 className="text-3xl md:text-4xl font-black text-stone-100 uppercase tracking-tighter">
+                Nossos <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">Palestrantes</span>
+              </h2>
+              <p className="text-stone-400 text-sm max-w-2xl font-medium">Reunimos os maiores nomes do Brasil para compartilhar conhecimento e experiências reais e atualizadas.</p>
+            </div>
+            
+            {/* Apple style Navigation Chevrons */}
+            <div className="flex gap-3">
+              <button 
+                onClick={() => scroll('left')}
+                className="w-12 h-12 bg-[#1A1512]/80 hover:bg-amber-500 hover:text-[#0E0B08] backdrop-blur-md rounded-full border border-amber-500/10 flex items-center justify-center text-stone-300 shadow-[0_4px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 cursor-pointer"
+                aria-label="Anterior"
+              >
+                <ChevronLeft size={20} strokeWidth={2.5} />
+              </button>
+              <button 
+                onClick={() => scroll('right')}
+                className="w-12 h-12 bg-[#1A1512]/80 hover:bg-amber-500 hover:text-[#0E0B08] backdrop-blur-md rounded-full border border-amber-500/10 flex items-center justify-center text-stone-300 shadow-[0_4px_15px_rgba(0,0,0,0.4)] hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all duration-300 cursor-pointer"
+                aria-label="Próximo"
+              >
+                <ChevronRight size={20} strokeWidth={2.5} />
+              </button>
+            </div>
           </div>
           
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: 'Sérgio Soares', role: 'Presidente do TCE-MT', image: speaker1 },
-              { name: 'Adriana Lima', role: 'Doutora em Direito', image: speaker2 },
-              { name: 'Teodorico Menezes', role: 'Presidente da OAB', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600' },
-            ].map((s, i) => (
-              <div key={i} className="group relative aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.7)] border border-amber-500/10 hover:border-amber-500/30 transition-all duration-500">
-                <img src={s.image} alt={s.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 filter brightness-95 contrast-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent"></div>
-                <div className="absolute bottom-10 left-10 text-white space-y-1">
-                  <h3 className="text-2xl font-black text-amber-50">{s.name}</h3>
-                  <p className="text-amber-400 font-bold uppercase tracking-[0.2em] text-[10px]">{s.role}</p>
+          {/* iOS-style Swipe Deck */}
+          <div className="max-w-7xl mx-auto relative">
+            <div 
+              ref={sliderRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none pb-8 px-4"
+            >
+              {speakers.map((s, i) => (
+                <div 
+                  key={i} 
+                  className="snap-center shrink-0 w-[280px] sm:w-[330px] aspect-[3/4.2] rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.7)] border border-amber-500/10 hover:border-amber-500/30 bg-gradient-to-br from-[#1E1815] to-[#120E0C] transition-all duration-500 group relative"
+                >
+                  <img 
+                    src={s.image} 
+                    alt={s.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-90 contrast-105" 
+                    style={{ objectPosition: s.pos }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0706] via-transparent to-transparent"></div>
+                  <div className="absolute bottom-8 left-8 right-8 text-white space-y-2">
+                    <span className="text-amber-400 font-black uppercase tracking-[0.2em] text-[10px] block">{s.role}</span>
+                    <h3 className="text-xl sm:text-2xl font-black text-amber-50 leading-tight">{s.name}</h3>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -309,20 +371,31 @@ export default function App() {
           </div>
 
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            {scheduleData[activeTab].map((item, i) => (
-              <div key={i} className="bg-gradient-to-br from-[#1E1815] to-[#120E0C] border border-amber-500/10 hover:border-amber-500/30 rounded-[2.5rem] p-4 shadow-2xl hover:shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-all duration-500 group">
-                <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 border border-amber-500/5">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-90 contrast-105" />
-                </div>
-                <div className="px-4 pb-4 space-y-3">
-                  <h4 className="text-xl font-black text-amber-50 leading-tight">{item.title}</h4>
-                  <p className="text-xs text-stone-300 leading-relaxed font-medium">{item.desc}</p>
-                  <div className="pt-4 border-t border-amber-500/10">
-                    <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500 tracking-tighter">{item.time}</span>
+            {scheduleData[activeTab].map((item, i) => {
+              const speakerInfo = getSpeakerImage(item.desc);
+              const cardImg = speakerInfo ? speakerInfo.img : item.img;
+              const cardPos = speakerInfo ? speakerInfo.pos : 'center';
+
+              return (
+                <div key={i} className="bg-gradient-to-br from-[#1E1815] to-[#120E0C] border border-amber-500/10 hover:border-amber-500/30 rounded-[2.5rem] p-4 shadow-2xl hover:shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:-translate-y-1 transition-all duration-500 group">
+                  <div className="relative aspect-video rounded-3xl overflow-hidden mb-6 border border-amber-500/5">
+                    <img 
+                      src={cardImg} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-90 contrast-105" 
+                      style={{ objectPosition: cardPos }}
+                    />
+                  </div>
+                  <div className="px-4 pb-4 space-y-3">
+                    <h4 className="text-xl font-black text-amber-50 leading-tight">{item.title}</h4>
+                    <p className="text-xs text-stone-300 leading-relaxed font-medium">{item.desc}</p>
+                    <div className="pt-4 border-t border-amber-500/10">
+                      <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500 tracking-tighter">{item.time}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

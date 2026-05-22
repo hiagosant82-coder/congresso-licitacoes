@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { 
   Menu, 
@@ -22,7 +22,10 @@ import { twMerge } from 'tailwind-merge';
 
 // Assets
 import logo from './assets/logo.png';
-import heroBanner from './assets/hero-banner.jpg';
+import hero1 from './assets/hero-1.jpg';
+import hero2 from './assets/hero-2.jpg';
+import hero3 from './assets/hero-3.jpg';
+import hero4 from './assets/hero-4.jpg';
 import speaker1 from './assets/speaker1.png';
 import speaker2 from './assets/speaker2.png';
 
@@ -128,6 +131,15 @@ const scheduleData: Record<number, { time: string, title: string, desc: string, 
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(1);
+  const [currentBanner, setCurrentBanner] = useState(0);
+  const banners = [hero1, hero2, hero3, hero4];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [banners.length]);
 
   return (
     <HelmetProvider>
@@ -141,7 +153,18 @@ export default function App() {
         {/* Hero Section */}
         <section className="pt-24 pb-8 px-4">
           <div className="max-w-7xl mx-auto rounded-4xl overflow-hidden shadow-3xl bg-[#0e0e0e] relative">
-            <img src={heroBanner} className="w-full h-auto block" alt="Hero Banner" />
+             <img src={banners[0]} className="w-full h-auto invisible" alt="placeholder" />
+             {banners.map((banner, index) => (
+                <motion.img 
+                  key={index}
+                  src={banner}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: currentBanner === index ? 1 : 0 }}
+                  transition={{ duration: 1 }}
+                  className="absolute inset-0 w-full h-full object-cover" 
+                  alt={`Hero Banner ${index + 1}`} 
+                />
+             ))}
           </div>
         </section>
 

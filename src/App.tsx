@@ -100,16 +100,29 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 
 const scheduleData: Record<number, { time: string, title: string, desc: string, img: string }[]> = {
   1: [
-    { time: 'Manhã', title: 'Planejamento Operacional de Compras Públicas com Inteligência Artificial', desc: '👨‍🏫 Dr. Ícaro Bitar', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600' },
-    { time: 'Tarde', title: 'Contratação Direta: Dispensa e Inexigibilidade', desc: '👨‍🏫 Dr. Jamil Manasfi', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600' }
+    { time: '08:00 - 08:30', title: 'Credenciamento, recepção e abertura', desc: 'Início oficial do evento', img: 'https://images.unsplash.com/photo-1540575861501-7ad060e39fe5?q=80&w=600' },
+    { time: '08:30 - 10:00', title: 'Planejamento Operacional de Compras Públicas com IA', desc: '👨‍🏫 Prof. Ícaro Bitar', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600' },
+    { time: '10:00 - 10:20', title: 'Coffee Break & Networking', desc: 'Pausa para café', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' },
+    { time: '10:20 - 11:50', title: 'Continuação da Palestra', desc: '👨‍🏫 Prof. Ícaro Bitar', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600' },
+    { time: '12:00 - 13:30', title: 'Intervalo para almoço', desc: 'Almoço livre', img: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600' },
+    { time: '13:30 - 15:00', title: 'Contratação Direta: Dispensa e Inexigibilidade', desc: '👨‍🏫 Prof. Jamil Manasfi', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600' },
+    { time: '15:00 - 15:20', title: 'Coffee Break & Networking', desc: 'Pausa para café', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' },
+    { time: '15:20 - 16:50', title: 'Continuação da Palestra', desc: '👨‍🏫 Prof. Jamil Manasfi', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600' }
   ],
   2: [
-    { time: 'Manhã', title: 'Seleção do Fornecedor: Pregão, Concorrência e Dispensa Eletrônica', desc: '👨‍🏫 Prof. Leandro Matsumota', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600' },
-    { time: 'Tarde', title: 'Responsabilização dos Servidores perante os Órgãos de Controle (TCE-MT e TCU)', desc: '👩‍🏫 Dra. Camila Jacobsen', img: 'https://images.unsplash.com/photo-1505664173615-04f1bef7b504?q=80&w=600' },
-    { time: 'Tarde', title: 'Credenciamento, Contrata+ Brasil e SICX', desc: '👨‍🏫 Dr. Willen Rarytton', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=600' }
+    { time: '08:00 - 09:30', title: 'Seleção do Fornecedor: Pregão, Concorrência e Dispensa Eletrônica', desc: '👨‍🏫 Prof. Leandro Matsumota', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600' },
+    { time: '09:30 - 09:50', title: 'Coffee Break & Networking', desc: 'Pausa para café', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' },
+    { time: '09:50 - 11:20', title: 'Continuação da Palestra', desc: '👨‍🏫 Prof. Leandro Matsumota', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600' },
+    { time: '12:00 - 13:30', title: 'Intervalo para almoço', desc: 'Almoço livre', img: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600' },
+    { time: '13:30 - 15:00', title: 'Responsabilização dos Servidores perante os Órgãos de Controle (TCE-MT e TCU)', desc: '👩‍🏫 Prof. Camila Jacobsen', img: 'https://images.unsplash.com/photo-1505664173615-04f1bef7b504?q=80&w=600' },
+    { time: '15:00 - 15:20', title: 'Coffee Break & Networking', desc: 'Pausa para café', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' },
+    { time: '15:20 - 16:50', title: 'Credenciamento', desc: '👨‍🏫 Prof. Willen Rarytton', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=600' }
   ],
   3: [
-    { time: 'Manhã', title: 'Gestão, Fiscalização e Execução de Contratos com uso de Inteligência Artificial', desc: '👨‍🏫 Dr. Jader Esteves', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600' }
+    { time: '08:00 - 09:30', title: 'Gestão, Fiscalização e Execução de Contratos com uso de IA', desc: '👨‍🏫 Prof. Jader Esteves', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600' },
+    { time: '09:30 - 09:50', title: 'Coffee Break & Networking', desc: 'Pausa para café', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' },
+    { time: '09:50 - 11:00', title: 'Continuação da Palestra', desc: '👨‍🏫 Prof. Jader Esteves', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600' },
+    { time: '11:00 - 11:30', title: 'Encerramento oficial', desc: '3º Congresso de Licitações do Vale do Araguaia', img: 'https://images.unsplash.com/photo-1540575861501-7ad060e39fe5?q=80&w=600' }
   ]
 };
 
@@ -120,7 +133,7 @@ export default function App() {
     <HelmetProvider>
       <div className="min-h-screen bg-white font-sans text-navy-900 selection:bg-sky-100">
         <Helmet>
-          <title>2º Congresso de Licitações do Vale do Araguaia</title>
+          <title>3º Congresso de Licitações do Vale do Araguaia</title>
         </Helmet>
 
         <Navbar />
@@ -254,7 +267,7 @@ export default function App() {
                   <h4 className="text-xl font-black text-navy-900 leading-tight">{item.title}</h4>
                   <p className="text-xs text-gray-500 leading-relaxed font-medium">{item.desc}</p>
                   <div className="pt-4 border-t border-gray-50">
-                    <span className="text-3xl font-black text-navy-900 tracking-tighter">{item.time}</span>
+                    <span className="text-2xl font-black text-navy-900 tracking-tighter">{item.time}</span>
                   </div>
                 </div>
               </div>

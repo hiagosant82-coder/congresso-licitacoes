@@ -98,6 +98,21 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
   );
 };
 
+const scheduleData: Record<number, { time: string, title: string, desc: string, img: string }[]> = {
+  1: [
+    { time: 'Manhã', title: 'Planejamento Operacional de Compras Públicas com Inteligência Artificial', desc: '👨‍🏫 Dr. Ícaro Bitar', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=600' },
+    { time: 'Tarde', title: 'Contratação Direta: Dispensa e Inexigibilidade', desc: '👨‍🏫 Dr. Jamil Manasfi', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600' }
+  ],
+  2: [
+    { time: 'Manhã', title: 'Seleção do Fornecedor: Pregão, Concorrência e Dispensa Eletrônica', desc: '👨‍🏫 Prof. Leandro Matsumota', img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600' },
+    { time: 'Tarde', title: 'Responsabilização dos Servidores perante os Órgãos de Controle (TCE-MT e TCU)', desc: '👩‍🏫 Dra. Camila Jacobsen', img: 'https://images.unsplash.com/photo-1505664173615-04f1bef7b504?q=80&w=600' },
+    { time: 'Tarde', title: 'Credenciamento, Contrata+ Brasil e SICX', desc: '👨‍🏫 Dr. Willen Rarytton', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?q=80&w=600' }
+  ],
+  3: [
+    { time: 'Manhã', title: 'Gestão, Fiscalização e Execução de Contratos com uso de Inteligência Artificial', desc: '👨‍🏫 Dr. Jader Esteves', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600' }
+  ]
+};
+
 export default function App() {
   const [activeTab, setActiveTab] = useState(1);
 
@@ -211,9 +226,9 @@ export default function App() {
             
             <div className="flex flex-wrap gap-2 md:gap-0 bg-gray-100 p-1.5 rounded-3xl md:rounded-full">
               {[
-                { id: 1, date: '17 Dezembro' },
-                { id: 2, date: '18 Dezembro' },
-                { id: 3, date: '19 Dezembro' }
+                { id: 1, date: '26 de Agosto' },
+                { id: 2, date: '27 de Agosto' },
+                { id: 3, date: '28 de Agosto' }
               ].map((tab) => (
                 <button 
                   key={tab.id}
@@ -230,11 +245,7 @@ export default function App() {
           </div>
 
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { time: '08:00 - 08:30', title: 'Credenciamento e abertura Oficial', desc: 'Início do evento com a recepção de todos os participantes e entrega do material.', img: 'https://images.unsplash.com/photo-1540575861501-7ad060e39fe5?q=80&w=600' },
-              { time: '08:30 - 10:00', title: 'Palestra Magna: O Novo Marco', desc: 'Análise aprofundada sobre as mudanças recentes na legislação e os impactos diretos.', img: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=600' },
-              { time: '10:00 - 10:20', title: 'Coffee Break', desc: 'Momento para networking e recarregar as energias com um café da manhã completo.', img: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600' }
-            ].map((item, i) => (
+            {scheduleData[activeTab].map((item, i) => (
               <div key={i} className="bg-white border border-gray-100 rounded-[2.5rem] p-4 shadow-xl hover:shadow-2xl transition-all group">
                 <div className="relative aspect-video rounded-3xl overflow-hidden mb-6">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />

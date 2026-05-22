@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0A0706] text-stone-200 antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Custom selection */
+  ::selection {
+    @apply bg-[#D4AF37]/20 text-[#F5E6C4];
+  }
+
+  /* Premium scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0706;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2C221B;
+    border: 2px solid #0A0706;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+  }
+}

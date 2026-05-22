@@ -22,7 +22,7 @@ import { twMerge } from 'tailwind-merge';
 
 // Assets
 import logo from './assets/logo.png';
-import heroBanner from './assets/hero-banner.png';
+import heroBanner from './assets/hero-banner.jpg';
 import speaker1 from './assets/speaker1.png';
 import speaker2 from './assets/speaker2.png';
 
